@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "Users" (
     "id" SERIAL NOT NULL,
-    "matricula" INTEGER NOT NULL,
+    "matricula" TEXT NOT NULL,
     "senha" TEXT NOT NULL,
     "nome" TEXT NOT NULL,
     "idCargo" INTEGER NOT NULL DEFAULT 1,

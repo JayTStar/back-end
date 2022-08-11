@@ -12,15 +12,16 @@ datasource db {
 
 model Users {
   id          Int        @id @default(autoincrement())
-  matricula   Int        @unique
+  matricula   String     @unique
   senha       String
   nome        String
   cargo       Cargos     @relation(fields: [idCargo], references: [id])
   idCargo     Int        @default(1)
   Categoria   Categorias @relation(fields: [idCategoria], references: [id])
   idCategoria Int
-  telefone    Int
-  aniversario DateTime
+  telefone    String
+  aniversario String
+  Sessions    Sessions[]
 }
 
 model Cargos {
@@ -35,4 +36,11 @@ model Categorias {
   Users Users[]
 }
 
+model Sessions {
+  id     Int    @id @default(autoincrement())
+  user   Users  @relation(fields: [idUser], references: [id])
+  idUser Int
+  token  String @unique
 
+  @@map("sessions")
+}
