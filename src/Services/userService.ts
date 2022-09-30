@@ -44,3 +44,39 @@ export async function signin(userData: userRepository.UserData){
 
     return token;
 }
+
+export async function getUserInfo(id: number){
+    const info = await userRepository.getInfo(id);
+
+    return {... info};
+}
+
+export async function getMembros(){
+    const membros = await userRepository.getMembros()
+
+    return membros
+}
+
+export async function getCargos() {
+    const cargos = await userRepository.getCargos();
+
+    return cargos;
+}
+
+export async function getCategorias(){
+    const cargos = await userRepository.getCategorias();
+
+    return cargos;
+}
+
+export async function editUser(id: number, data: object) {
+    const userUpdate = await userRepository.editUser(id, data);
+
+    return userUpdate
+}
+
+export async function deleteUser(id: number){
+    const userDelete = await userRepository.userDelete(id);
+
+    return userDelete
+}
