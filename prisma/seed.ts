@@ -68,6 +68,7 @@ async function adminUser(){
         where: { matricula : "000000"},
         update: {},
         create: {
+            id: 0,
             matricula: "000000",
             senha: senha,
             nome: null,
