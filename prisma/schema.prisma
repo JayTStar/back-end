@@ -11,28 +11,28 @@ datasource db {
 }
 
 model Users {
-  id          Int        @id @default(autoincrement())
-  matricula   String     @unique
+  id          Int         @id @default(autoincrement())
+  matricula   String      @unique
   senha       String
-  nome        String
-  cargo       Cargos     @relation(fields: [idCargo], references: [id])
-  idCargo     Int        @default(1)
-  Categoria   Categorias @relation(fields: [idCategoria], references: [id])
-  idCategoria Int
-  telefone    String
-  aniversario String
+  nome        String?
+  cargo       Cargos?     @relation(fields: [idCargo], references: [id])
+  idCargo     Int?        @default(1)
+  Categoria   Categorias? @relation(fields: [idCategoria], references: [id])
+  idCategoria Int?
+  telefone    String?
+  aniversario String?
   Sessions    Sessions[]
 }
 
 model Cargos {
   id    Int     @id @default(autoincrement())
-  nome  String
+  nome  String  @unique
   Users Users[]
 }
 
 model Categorias {
   id    Int     @id @default(autoincrement())
-  nome  String
+  nome  String  @unique
   Users Users[]
 }
 

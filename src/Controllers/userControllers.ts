@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 
-import { UserData } from "../Repositories/userRepository.js";
-import * as userServices from "../Services/userService.js";
+import { UserData } from "../Repositories/userRepository";
+import * as userServices from "../Services/userService";
 
 
 export async function signup(req: Request, res: Response){

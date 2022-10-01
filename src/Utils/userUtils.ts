@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export function encryptPassword(password: string) {
-    const encryptedPassword = bcrypt.hashSync(password, +process.env.SALT);
+    const encryptedPassword = bcrypt.hashSync(password, +process.env.SALT!);
     return encryptedPassword;
 }
 
@@ -22,7 +22,7 @@ export function generateToken(userId: number) {
     };
     const expirationTime = 60 * 60 * 24 * 7;
     const config = { expiresIn: expirationTime };
-    const secretKey = process.env.JWT_SECRET_KEY;
+    const secretKey = process.env.JWT_SECRET_KEY!;
 
     const token = jwt.sign(data, secretKey, config);
     return token;

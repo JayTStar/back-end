@@ -36,9 +36,3 @@ ALTER TABLE "Users" ADD CONSTRAINT "Users_idCargo_fkey" FOREIGN KEY ("idCargo") 
 
 -- AddForeignKey
 ALTER TABLE "Users" ADD CONSTRAINT "Users_idCategoria_fkey" FOREIGN KEY ("idCategoria") REFERENCES "Categorias"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddTableInfo
-INSERT INTO "Cargos" ("nome") VALUES ('membro'), ('lider'), ('capitao');
-
--- AddTableInfo
-INSERT INTO "Categorias" ("nome") VALUES ('miniSumo'), ('sumo'), ('seguidor'), ('combate'), ('marketing'), ('financeiro'), ('gestao');

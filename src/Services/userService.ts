@@ -1,9 +1,9 @@
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 
-import * as userRepository from "../Repositories/userRepository.js";
-import * as userUtils from "../Utils/userUtils.js";
-import * as sessionRepository from "../Repositories/sessionRepository.js";
+import * as userRepository from "../Repositories/userRepository";
+import * as userUtils from "../Utils/userUtils";
+import * as sessionRepository from "../Repositories/sessionRepository";
 
 dotenv.config();
 

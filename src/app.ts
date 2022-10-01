@@ -2,8 +2,8 @@ import cors from "cors";
 import express from "express";
 import "express-async-errors";
 
-import router from "./Routes/index.js";
-import { handleError } from "./Middlewares/errorHandler.js";
+import router from "./Routes/index";
+import { handleError } from "./Middlewares/errorHandler";
 
 const app = express();
 app.use(cors());
