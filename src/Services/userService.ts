@@ -1,5 +1,4 @@
 import dotenv from "dotenv";
-import jwt from "jsonwebtoken";
 
 import * as userRepository from "../Repositories/userRepository";
 import * as userUtils from "../Utils/userUtils";
@@ -7,8 +6,17 @@ import * as sessionRepository from "../Repositories/sessionRepository";
 
 dotenv.config();
 
-export async function signup(userData: userRepository.UserData){
+export async function signup(userData: userRepository.UserData, id: number){
     const {matricula, senha, nome, idCargo, idCategoria, telefone, aniversario} = userData;
+
+    const userInfo = await getUserInfo(id);
+
+    if(userInfo.cargo.nome != "Capitão" && userInfo.cargo.nome != "Admin"){
+        throw {
+            type: "unauthorized",
+            message: "Unauthorised request",
+        };
+    }
 
     await checkMatricula(matricula);
 
@@ -32,6 +40,7 @@ export async function signin(userData: userRepository.UserData){
     const user = await userRepository.getByMatricula(userData.matricula);
 
     if (!user || !userUtils.checkPassword(userData.senha, user.senha)) {
+
         throw {
             type: "unauthorized",
             message: "Matrícula ou senha invalidos",
@@ -69,8 +78,17 @@ export async function getCategorias(){
     return cargos;
 }
 
-export async function editUser(id: number, data: object) {
-    const userUpdate = await userRepository.editUser(id, data);
+export async function editUser(editId: number, data: object, userid: number) {
+
+    const userInfo = await getUserInfo(userid);
+
+    if(userInfo.cargo.nome != "lider" && userInfo.cargo.nome != "capitao"){
+        throw {
+            type: "unauthorized",
+            message: "Unauthorised request",
+        };
+    }
+    const userUpdate = await userRepository.editUser(editId, data);
 
     return userUpdate
 }

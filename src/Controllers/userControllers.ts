@@ -5,23 +5,13 @@ import * as userServices from "../Services/userService";
 
 
 export async function signup(req: Request, res: Response){
-    const user: UserData = req.body;
+    const userData: UserData = req.body;
 
-    const userid : number = res.locals.tokenData.userId;
+    const id : number = res.locals.tokenData.userId;
+    
+    const userUpdate = await userServices.signup(userData, id);
 
-    const userInfo = await userServices.getUserInfo(userid);
-
-    if(userInfo.cargo.nome != "lider" && userInfo.cargo.nome != "capitao"){
-        throw {
-            type: "unauthorized",
-            message: "Unauthorised request",
-        };
-    }
-    else{
-        const userUpdate = await userServices.signup(user);
-
-        res.send(userUpdate);
-    }
+    res.sendStatus;
 }
 
 export async function signin(req: Request, res: Response){
@@ -29,7 +19,7 @@ export async function signin(req: Request, res: Response){
 
     const token = await userServices.signin(user);
 
-    res.send(token);
+    res.send({token: token});
 }
 
 export async function getUserInfo(req: Request, res: Response) {
@@ -72,23 +62,13 @@ export async function editUser(req: Request, res: Response) {
     const editId : number = parseInt(req.params.id);
     const data = req.body;
 
-    const userInfo = await userServices.getUserInfo(userid);
+    const userUpdate = await userServices.editUser(editId, data, userid);
 
-    if(userInfo.cargo.nome != "lider" && userInfo.cargo.nome != "capitao"){
-        throw {
-            type: "unauthorized",
-            message: "Unauthorised request",
-        };
-    }
-    else{
-        const userUpdate = await userServices.editUser(editId, data);
-
-        res.send(userUpdate);
-    }
+    res.send(userUpdate);
 }
 
 export async function deleteUser(req: Request, res: Response){
     const id : number = parseInt(req.params.id);
 
-    const userDelete = await userServices.deleteUser(id)
+    await userServices.deleteUser(id)
 }

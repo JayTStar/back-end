@@ -10,10 +10,8 @@ export function encryptPassword(password: string) {
 }
 
 export function checkPassword(password: string, passwordHash: string) {
-    if (!bcrypt.compareSync(password, passwordHash)) {
-        return false;
-    }
-    return true;
+    
+    return bcrypt.compareSync(password, passwordHash);
 }
 
 export function generateToken(userId: number) {
