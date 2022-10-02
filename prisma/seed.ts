@@ -62,7 +62,7 @@ async function categoriasSeed(){
 
 async function adminUser(){
 
-    const senha = encryptPassword("admin");
+    const senha = encryptPassword("admin0");
 
     const admin = await prisma.users.upsert({
         where: { matricula : "000000"},
@@ -72,7 +72,7 @@ async function adminUser(){
             matricula: "000000",
             senha: senha,
             nome: null,
-            idCargo: null,
+            idCargo: 3,
             idCategoria: null,
             telefone: null,
             aniversario: null
@@ -80,12 +80,4 @@ async function adminUser(){
     })
 }
 
-main()
-  .then(async () => {
-    await prisma.$disconnect()
-  })
-  .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+main();
