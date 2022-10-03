@@ -50,6 +50,12 @@ export async function getMembros(){
         },
     });
 
+    const index = membros.findIndex(object => {
+        return object.matricula === '000000';
+    });
+
+    delete membros[index]
+    
     return membros;
 }
 
@@ -65,6 +71,12 @@ function exclude<User, Key extends keyof User>(
 
 export async function getCargos() {
     const cargos = await prisma.cargos.findMany();
+
+    const index = cargos.findIndex(object => {
+        return object.nome === 'Admin';
+    });
+
+    delete cargos[index]
 
     return cargos;
 }
